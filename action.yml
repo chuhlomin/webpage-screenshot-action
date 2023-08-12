@@ -37,6 +37,18 @@ inputs:
     description: 'Output file name/path. If not specified, the screenshot will be saved to "screenshot.png" in the current directory.'
     required: false
     default: screenshot.png
+  width:
+    description: 'Viewport width in pixels. If not specified, the default browser width will be used.'
+    required: false
+    default: "800"
+  height:
+    description: 'Viewport height in pixels. If not specified, the default browser height will be used.'
+    required: false
+    default: "600"
+  debugInfo:
+    description: 'If set to true, the debug information will be printed to the console.'
+    required: false
+    default: ""
 
 outputs:
   scriptResult:
