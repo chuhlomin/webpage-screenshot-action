@@ -17,12 +17,9 @@ const turnOnConsoleCatching = async function (page) {
 };
 
 async function launchBrowser(){
-    const width = parseInt(core.getInput('width')) || 800;
-    const height = parseInt(core.getInput('height')) || 600;
     const launchOptions = {
         executablePath: await getBrowserPath(),
-        defaultViewport: {width, height},
-        headless: true
+        headless: true,
     }
     core.info('Launch options: ' + JSON.stringify(launchOptions));
     return puppeteer.launch(launchOptions);
@@ -92,6 +89,11 @@ const puppetRun = async function (parameters) {
 
     const urls = parameters['url']
 
+    const width = parseInt(core.getInput('width')) || 800;
+    const height = parseInt(core.getInput('height')) || 600;
+    const deviceScaleFactor = parseInt(core.getInput('deviceScaleFactor')) || 1;
+
+    core.info(`Parameters: width: ${width}, height: ${height}, deviceScaleFactor: ${deviceScaleFactor}`);
 
     // start the headless browser
     const browser = launchBrowser();
@@ -103,6 +105,12 @@ const puppetRun = async function (parameters) {
                 return browser.newPage().then(async (page) => {
                     // turn on console logs catching
                     await turnOnConsoleCatching(page);
+
+                    page.setViewport({
+                        width: width,
+                        height: height,
+                        deviceScaleFactor: deviceScaleFactor,
+                    });
 
                     core.info(`Navigating to ${url}`);
                     return page.goto(url).then(async () => {

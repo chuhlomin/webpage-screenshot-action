@@ -38,13 +38,17 @@ inputs:
     required: false
     default: screenshot.png
   width:
-    description: 'Viewport width in pixels. If not specified, the default browser width will be used.'
+    description: 'Viewport width in pixels. If not specified, the default browser width will be used (800).'
     required: false
     default: "800"
   height:
-    description: 'Viewport height in pixels. If not specified, the default browser height will be used.'
+    description: 'Viewport height in pixels. If not specified, the default browser height will be used (600).'
     required: false
     default: "600"
+  deviceScaleFactor:
+    description: 'Device scale factor. If not specified, the default browser device scale factor will be used (1).'
+    required: false
+    default: "1"
   debugInfo:
     description: 'If set to true, the debug information will be printed to the console.'
     required: false
