@@ -92,6 +92,19 @@ const puppetRun = async function (parameters) {
     const width = parseInt(core.getInput('width')) || 800;
     const height = parseInt(core.getInput('height')) || 600;
     const deviceScaleFactor = parseInt(core.getInput('deviceScaleFactor')) || 1;
+    const isMobile = core.getInput('isMobile') === 'true';
+    const hasTouch = core.getInput('hasTouch') === 'true';
+    const isLansScape = core.getInput('isLansScape') === 'true';
+    const userAgent = core.getInput('userAgent') || ''
+
+    const viewport = {
+        width: width,
+        height: height,
+        deviceScaleFactor: deviceScaleFactor,
+        isMobile: isMobile,
+        hasTouch: hasTouch,
+        isLansScape: isLansScape,
+    };
 
     core.info(`Parameters: width: ${width}, height: ${height}, deviceScaleFactor: ${deviceScaleFactor}`);
 
@@ -106,11 +119,11 @@ const puppetRun = async function (parameters) {
                     // turn on console logs catching
                     await turnOnConsoleCatching(page);
 
-                    page.setViewport({
-                        width: width,
-                        height: height,
-                        deviceScaleFactor: deviceScaleFactor,
-                    });
+                    page.setViewport(viewport);
+
+                    if (userAgent) {
+                        await page.setUserAgent(userAgent);
+                    }
 
                     core.info(`Navigating to ${url}`);
                     return page.goto(url).then(async () => {

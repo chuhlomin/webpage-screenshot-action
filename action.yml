@@ -18,25 +18,50 @@ inputs:
     default: wholePage
   selector:
     description: |
-      CSS selector of the element to be captured or element to which the view should be scrolled. 
+      CSS selector of the element to be captured or element to which the view should be scrolled.
       Can be used in "element" and "scrollToElement" modes.
       Use "selector" or "xpath" input, not both.
     required: false
   xpath:
     description: |
-      xpath expression for the element to be captured or element to which the view should be scrolled. 
+      xpath expression for the element to be captured or element to which the view should be scrolled.
       Can be used in "element" and "scrollToElement" modes.
       Use "selector" or "xpath" input, not both.
     required: false
   scriptBefore:
     description: |
-      Script to be executed before the screenshot is taken. 
+      Script to be executed before the screenshot is taken.
       Can be used in "script", "page", "wholePage" mode.
     required: false
-  output:
-    description: 'Output file name/path. If not specified, the screenshot will be saved to "screenshot.png" in the current directory.'
+  userAgent:
+    description: |
+      Overwrite the default browser user agent with a custom one.
     required: false
-    default: screenshot.png
+    default: ""
+  type:
+    description: |
+      Specify screenshot type, can be `jpeg`, `png` or `webp`.
+      Defaults to 'png'.
+    required: false
+    default: png
+  quality:
+    description: |
+      The quality of the image, between 0-100. Not applicable to `png` images.
+      Defaults to 100.
+    required: false
+    default: "95"
+  isMobile:
+    description: 'Whether the meta viewport tag is taken into account. Defaults to `false`.'
+    required: false
+    default: ""
+  hasTouch:
+    description: 'Specifies if viewport supports touch events. Defaults to `false`'
+    required: false
+    default: ""
+  isLansScape:
+    description: 'Specifies if viewport is in landscape mode. Defaults to `false`.'
+    required: false
+    default: ""
   width:
     description: 'Viewport width in pixels. If not specified, the default browser width will be used (800).'
     required: false
@@ -49,6 +74,10 @@ inputs:
     description: 'Device scale factor. If not specified, the default browser device scale factor will be used (1).'
     required: false
     default: "1"
+  output:
+    description: 'Output file name/path. If not specified, the screenshot will be saved to "screenshot.png" in the current directory.'
+    required: false
+    default: screenshot.png
   debugInfo:
     description: 'If set to true, the debug information will be printed to the console.'
     required: false
