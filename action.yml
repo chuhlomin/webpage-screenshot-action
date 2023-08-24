@@ -47,9 +47,8 @@ inputs:
   quality:
     description: |
       The quality of the image, between 0-100. Not applicable to `png` images.
-      Defaults to 100.
     required: false
-    default: "95"
+    default: ""
   isMobile:
     description: 'Whether the meta viewport tag is taken into account. Defaults to `false`.'
     required: false
@@ -58,7 +57,7 @@ inputs:
     description: 'Specifies if viewport supports touch events. Defaults to `false`'
     required: false
     default: ""
-  isLansScape:
+  isLandscape:
     description: 'Specifies if viewport is in landscape mode. Defaults to `false`.'
     required: false
     default: ""
@@ -74,6 +73,14 @@ inputs:
     description: 'Device scale factor. If not specified, the default browser device scale factor will be used (1).'
     required: false
     default: "1"
+  omitBackground:
+    description: 'Hides default white background and allows capturing screenshots with transparency. Defaults to `true`.'
+    required: false
+    default: "true"
+  encoding:
+    description: 'The encoding of the image, can be either `base64` or `binary`. Defaults to `binary`.'
+    required: false
+    default: "binary"
   output:
     description: 'Output file name/path. If not specified, the screenshot will be saved to "screenshot.png" in the current directory.'
     required: false

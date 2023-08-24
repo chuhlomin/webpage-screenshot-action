@@ -60435,8 +60435,12 @@ const puppetRun = async function (parameters) {
     const deviceScaleFactor = parseInt(core.getInput('deviceScaleFactor')) || 1;
     const isMobile = core.getInput('isMobile') === 'true';
     const hasTouch = core.getInput('hasTouch') === 'true';
-    const isLansScape = core.getInput('isLansScape') === 'true';
+    const isLandscape = core.getInput('isLandscape') === 'true';
     const userAgent = core.getInput('userAgent') || ''
+
+    const omitBackground = core.getInput('omitBackground') === 'true';
+    const landscape = core.getInput('landscape') === 'true';
+    const encoding = core.getInput('encoding') || 'binary';
 
     const viewport = {
         width: width,
@@ -60444,7 +60448,7 @@ const puppetRun = async function (parameters) {
         deviceScaleFactor: deviceScaleFactor,
         isMobile: isMobile,
         hasTouch: hasTouch,
-        isLansScape: isLansScape,
+        isLandscape: isLandscape,
     };
 
     core.info(`Parameters: width: ${width}, height: ${height}, deviceScaleFactor: ${deviceScaleFactor}`);
@@ -60485,7 +60489,12 @@ const puppetRun = async function (parameters) {
                         }
 
                         core.info(`Taking screenshot of ${url}`);
-                        const screenshotOptions = {path: path, fullPage: parameters.mode === 'wholePage'};
+                        const screenshotOptions = {
+                            path: path,
+                            fullPage: parameters.mode === 'wholePage',
+                            omitBackground: omitBackground,
+                            encoding: encoding,
+                        };
                         let waiter = getScreenshotOperation(page, screenshotOptions, parameters);
                         core.debug("waiter: " + waiter);
                         return waiter
