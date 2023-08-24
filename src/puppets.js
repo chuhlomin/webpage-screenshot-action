@@ -97,6 +97,8 @@ const puppetRun = async function (parameters) {
     const isLandscape = core.getInput('isLandscape') === 'true';
     const userAgent = core.getInput('userAgent') || ''
 
+    const fileType = core.getInput('type') || 'png';
+    const quality = parseInt(core.getInput('quality')) || 100;
     const omitBackground = core.getInput('omitBackground') === 'true';
     const encoding = core.getInput('encoding') || 'binary';
 
@@ -152,6 +154,8 @@ const puppetRun = async function (parameters) {
                             fullPage: parameters.mode === 'wholePage',
                             omitBackground: omitBackground,
                             encoding: encoding,
+                            type: fileType,
+                            quality: quality,
                         };
                         let waiter = getScreenshotOperation(page, screenshotOptions, parameters);
                         core.debug("waiter: " + waiter);
